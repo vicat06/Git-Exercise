@@ -5,6 +5,10 @@ class Adc:
     def __init__(self) -> None:
         self.analogVolt = 2.3
 
+    def setAnalogVolt(self, value):
+        if value >= 0 and value <= self.maxVolt:
+            self.analogVolt = value
+
 
 
     def toDigital(self):
@@ -26,7 +30,7 @@ class Adc:
         
         decimalDigitalNum = int(digitalNum, 2)
         analogVolt = decimalDigitalNum / (2**10 - 1) * 5
-        self.analogVolt = analogVolt
+        self.setAnalogVolt(analogVolt)
 
     def isBinaryNumCorrect(self, binaryNum):
         if len(binaryNum) > 10 or re.search(r'[^01]', binaryNum):
